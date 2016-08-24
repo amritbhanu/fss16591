@@ -40,22 +40,22 @@
 - There is a temprory out directory set to store results. 
 - This time 5x5 crossval is used. Dataset is divided into 5 bins and ran 5 times with a random seed to shuffle the data.
 - 2 learners are used j48 and jrip but this time they ran 5 times each.
-- The output is saved using gawk by extracting yes class with its precison and recall into 2 files. Files are saved in a temporary folder out.
+- The output is saved using gawk by extracting yes class with its false alarm and recall into 2 files. Files are saved in a temporary folder out.
 
 ## eg8
-- eg8 is similar to eg7 but this time precision and recall is saved in the out directory by actually specifying the column names.
+- eg8 is similar to eg7 but this time false alarm and recall is saved in the out directory by actually specifying the column names.
 - column is provided to actually retrieve the results based on column name rather than gawk
 
 ## eg9
 - The output which was saved in a temporary files after running eg8 is made use here.
 - This is a statistical test (scott-knott) to separate which learner performed better based on median and IQR values.
-- Both learners performed, ie wrt precision and recall, the same according to scott-knott test. 
+- Both learners performed, ie wrt false alarm and recall, the same according to scott-knott test. 
 
 ## eg10
 - the dataset used is jedit.arff and ran with 5 learners j48, jrip, nb, rbfnet and bnet. 
-- crossval of 5x5 with random seed to shuffle data. The results (precision and recall) are saved in local out directory.
+- crossval of 5x5 with random seed to shuffle data. The results (false alarm and recall) are saved in local out directory.
 - scott knott is ran again but we can see from recall we got different learners different ranks. This is because different ranges of median with higher IQR.
-- but for precision we got the same rankings.
+- but for false alarm we got the same rankings.
 - Learners
   - j48 is a a decision tree learner which implements C4.5 algorithm. Based on different entropy values, it finds which attributes are the most important ones to identify a particular class. Down the tree, it starts pruning those leaves depending on its entropy.
   - jrip is an propositional rule learner. Repeated Incremental Pruning to Produce Error Reduction. It starts with an error rate >= 50% and then it starts growing and keeps adding the conditions until it makes rules 100% accurate. It uses a pruning strategy to rule out some of the conditions.
