@@ -70,8 +70,8 @@ rank ,         name ,    med   ,  iqr
 
 ```
 outlook        mode: sunny, entropy: 1.577
-temperature-   mean: 73.571, std dev: 6.572
-<humidity      mean: 81.643, std dev: 10.285
+temperature    mean: 73.571, std dev: 6.572
+humidity       mean: 81.643, std dev: 10.285
 windy          mode: FALSE, entropy: 0.985
->play          mean: 1.071, std dev: 0.997
+play           mean: 1.071, std dev: 0.997
 ```

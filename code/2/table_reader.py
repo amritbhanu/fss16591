@@ -118,8 +118,8 @@ class Table:
         self.csv = csv_file
         self.rows = []
         headings = csv(csv_file).next()
-        self.cols = [Sym(headings[0]), Num(headings[1]), Num(headings[2]), Sym(headings[3]),
-                     Num(headings[4])]
+        self.cols = [Sym(headings[0]), Num(headings[1].split('-')[0]), Num(headings[2].split('<')[1]), Sym(headings[3]),
+                     Num(headings[4].split('>')[1])]
 
     def add_rows(self, csv_file):
         headings = csv(csv_file).next()
@@ -134,6 +134,5 @@ if __name__ == '__main__':
     data = '../1/ninja/data/weather.csv'
     table = Table(data)
     table.add_rows(data)
-    s = "sr"
     for col in table.cols:
         col.show()
