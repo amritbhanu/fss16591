@@ -15,7 +15,7 @@ def min(x, y): return x if x < y else y
 
 
 class Num:
-    def __init__(i,name):
+    def __init__(i, name):
         i.mu, i.n, i.m2, i.up, i.lo, i.name = 0, 0, 0, -10e32, 10e32, name
 
     def add(i, x):
@@ -38,12 +38,12 @@ class Num:
         return 0 if i.n <= 2 else (i.m2 / (i.n - 1)) ** 0.5
 
     def show(i):
-        print(str(i.name).ljust(15)+"mean: %0.3f, std dev: %0.3f" % (i.mu, i.sd()))
+        print(str(i.name).ljust(15) + "mean: %0.3f, std dev: %0.3f" % (i.mu, i.sd()))
 
 
 class Sym:
-    def __init__(i,name):
-        i.counts, i.most, i.mode, i.n,i.name = {}, 0, None, 0,name
+    def __init__(i, name):
+        i.counts, i.most, i.mode, i.n, i.name = {}, 0, None, 0, name
 
     def add(i, x):
         i.n += 1
@@ -67,7 +67,7 @@ class Sym:
         return tmp
 
     def show(i):
-        print(str(i.name).ljust(15)+"mode: %s, entropy: %0.3f" % (i.mode, i.ent()))
+        print(str(i.name).ljust(15) + "mode: %s, entropy: %0.3f" % (i.mode, i.ent()))
 
 
 ## Code for rows, csv functions have been taken from https://github.com/txt/fss16/blob/master/src/rows.py
@@ -131,9 +131,9 @@ class Table:
 
 
 if __name__ == '__main__':
-    data='../1/ninja/data/weather.csv'
+    data = '../1/ninja/data/weather.csv'
     table = Table(data)
     table.add_rows(data)
-    s="sr"
+    s = "sr"
     for col in table.cols:
         col.show()
