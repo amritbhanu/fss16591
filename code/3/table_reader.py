@@ -1,4 +1,4 @@
-from __future__ import print_function, division
+# from __future__ import print_function, division
 
 __author__ = 'amrit'
 
@@ -38,23 +38,21 @@ class Num:
         return 0 if i.n <= 2 else (i.m2 / (i.n - 1)) ** 0.5
 
     def show(i):
-        print(str(i.name).ljust(15) + "mean: %0.3f, std dev: %0.3f" % (i.mu, i.sd()))
+        print(str(i.name).ljust(15) + "mean: %0.3f, std dev: %0.3f" %
+              (i.mu, i.sd()))
 
     # Norm code by Dr.Menzies
-    def norm(i):
-        tmp= (x - i.lo)/(i.up - i.lo + 10**-32)
+    def norm(i, x):
+        tmp = (x - i.lo)/(i.up - i.lo + 10**-32)
         if tmp > 1: return 1
         elif tmp < 0: return 0
         else: return tmp
 
     def dist(i, x, y):
-        return i.norm(x) - i.norm(y)
+        return abs(i.norm(x) - i.norm(y))
 
     def furthest(i, x):
         return i.up if x < (i.up - i.lo)/2 else i.lo
-
-    def aha_dist(i):
-        pass
 
 
 class Sym:
@@ -89,7 +87,7 @@ class Sym:
     def norm(i, x):
         return x
 
-    def distance(i, x, y):
+    def dist(i, x, y):
         return 0 if x == y else 1
 
     def furthest(i, x):
@@ -144,7 +142,8 @@ class Table:
         self.csv = csv_file
         self.rows = []
         headings = csv(csv_file).next()
-        self.cols = [Sym(headings[0]), Num(headings[1].split('-')[0]), Num(headings[2].split('<')[1]), Sym(headings[3]),
+        self.cols = [Sym(headings[0]), Num(headings[1].split('-')[0]),
+                     Num(headings[2].split('<')[1]), Sym(headings[3]),
                      Num(headings[4].split('>')[1])]
 
     def add_rows(self, csv_file):
@@ -155,6 +154,36 @@ class Table:
                 for count, item in enumerate(row):
                     self.cols[count].add(item)
 
+    # Forumla exactly taken from Aha's paper.
+    # Minus sign is removed, because distance can't be negative.
+    def aha_distance(i, r1, r2):
+        distance = 0
+        for col, row1, row2 in zip(i.cols, r1, r2):
+            distance += col.dist(row1, row2)
+        return math.sqrt(distance)
+        # return math.sqrt(sum([col.dist(row1, row2) for col, row1,
+        #     row2 in ]))
+
+    def min_max_distances(i):
+        for a in xrange(len(i.rows)):
+            min_distance = 999999
+            max_distance = 0
+            current_row = i.rows[a]
+            other_rows = i.rows[:a]
+            if a < len(i.rows):
+                other_rows += i.rows[a+1:]
+            for row in other_rows:
+                current_distance = i.aha_distance(current_row, row)
+                if current_distance < min_distance:
+                    min_distance = current_distance
+                    min_row = row
+                if current_distance > max_distance:
+                    max_distance = current_distance
+                    max_row = row
+            print("Closest Row for Row " + str(i.rows[a]) + ": " + str(min_row))
+            print("Farthest Row for Row " + str(i.rows[a]) + ": " + str(max_row))
+
+
 
 if __name__ == '__main__':
     data = '../1/ninja/data/weather.csv'
@@ -162,3 +191,4 @@ if __name__ == '__main__':
     table.add_rows(data)
     for col in table.cols:
         col.show()
+    table.min_max_distances()
