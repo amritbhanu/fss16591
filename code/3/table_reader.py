@@ -161,8 +161,6 @@ class Table:
         for col, row1, row2 in zip(i.cols, r1, r2):
             distance += col.dist(row1, row2)
         return math.sqrt(distance)
-        # return math.sqrt(sum([col.dist(row1, row2) for col, row1,
-        #     row2 in ]))
 
     def min_max_distances(i):
         for a in xrange(len(i.rows)):
