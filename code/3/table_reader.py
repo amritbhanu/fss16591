@@ -160,10 +160,14 @@ class Table:
         distance = 0
         for col, row1, row2 in zip(i.cols, r1, r2):
             distance += col.dist(row1, row2)
+        if distance<0:
+            distance = 0
+            for col, row1, row2 in zip(i.cols, r2, r1):
+                distance += col.dist(row1, row2)
         return math.sqrt(distance)
 
     def min_max_distances(i):
-        for a in xrange(2):
+        for a in xrange(len(i.rows)):
             min_distance = 10**32
             max_distance = 10**-32
             current_row = i.rows[a]
