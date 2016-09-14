@@ -163,7 +163,7 @@ class Table:
         return math.sqrt(distance)
 
     def min_max_distances(i):
-        for a in xrange(len(i.rows)):
+        for a in xrange(2):
             min_distance = 10**32
             max_distance = 10**-32
             current_row = i.rows[a]
