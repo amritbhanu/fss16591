@@ -43,13 +43,13 @@ class Num:
 
     # Norm code by Dr.Menzies
     def norm(i, x):
-        tmp = (x - i.lo)/(i.up - i.lo + 10**-32)
+        tmp = (x - i.lo) / (i.up - i.lo + 10**-32)
         if tmp > 1: return 1
         elif tmp < 0: return 0
         else: return tmp
 
     def dist(i, x, y):
-        return abs(i.norm(x) - i.norm(y))
+        return i.norm(x) - i.norm(y)
 
     def furthest(i, x):
         return i.up if x < (i.up - i.lo)/2 else i.lo
@@ -164,14 +164,16 @@ class Table:
 
     def min_max_distances(i):
         for a in xrange(len(i.rows)):
-            min_distance = 999999
-            max_distance = 0
+            min_distance = 10**32
+            max_distance = 10**-32
             current_row = i.rows[a]
             other_rows = i.rows[:a]
             if a < len(i.rows):
                 other_rows += i.rows[a+1:]
+            # print current_row
             for row in other_rows:
                 current_distance = i.aha_distance(current_row, row)
+                # print current_distance,row, min_distance, max_distance, min_row, max_row
                 if current_distance < min_distance:
                     min_distance = current_distance
                     min_row = row
@@ -180,7 +182,6 @@ class Table:
                     max_row = row
             print("Closest Row for Row " + str(i.rows[a]) + ": " + str(min_row))
             print("Farthest Row for Row " + str(i.rows[a]) + ": " + str(max_row))
-
 
 
 if __name__ == '__main__':
