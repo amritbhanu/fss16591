@@ -1,4 +1,4 @@
-# Paper 1 summary
+# Paper 3 summary
 
 ## (i) Reference : D'Ambros, Marco, Michele Lanza, and Romain Robbes. "An extensive comparison of bug prediction approaches." In 2010 7th IEEE Working Conference on Mining Software Repositories (MSR 2010), pp. 31-41. IEEE, 2010.
 
