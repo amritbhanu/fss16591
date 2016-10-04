@@ -35,10 +35,6 @@ class MiniBatchKMeans(object):
                 pass
                 # WIP
 
-    def predict(self, row) :
-        nearest_cluster = self.clusters.find_nearest(row)
-        innerKNN = KNN(self.cluster_contents[nearest_cluster.rid][1], self.k)
-        return innerKNN.predict(row)
 
 
 if __name__ == '__main__':
