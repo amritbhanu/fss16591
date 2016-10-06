@@ -1,6 +1,7 @@
 from __future__ import division
 import csv, re
-
+import sys
+sys.dont_write_bytecode = True
 
 class Csv(object):
     """docstring for Csv"""

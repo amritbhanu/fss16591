@@ -1,9 +1,9 @@
 import sys, math
 from Num import Num
 from Sym import Sym
-from utils import max, min
 from Csv import Csv
-        
+import sys
+sys.dont_write_bytecode = True
 
 class Table(object):
 
@@ -41,28 +41,23 @@ class Table(object):
                 distance += col.dist(row1, row2)
         return math.sqrt(distance)
 
-    def minDistance(self, index, row):
+    def minDistance(self, current_row, other_rows):
         min_distance = 10**32
-        max_distance = 10**-32
-        current_row = self.rows[index]
-        other_rows = self.rows[:index]
-        if index < len(self.rows):
-            other_rows += self.rows[index+1:]
-        for row in other_rows:
+        for i,row in enumerate(other_rows):
             current_distance = self.aha_distance(current_row, row)
             if current_distance < min_distance:
                 min_distance = current_distance
                 min_row = row
-        return min_row
+                index=i
+        return min_row, index
 
     def maxDistance(self, index, row):
-        min_distance = 10**32
         max_distance = 10**-32
         current_row = self.rows[index]
         other_rows = self.rows[:index]
         if index < len(self.rows):
             other_rows += self.rows[index+1:]
-        for row in other_rows:
+        for i,row in enumerate(other_rows):
             current_distance = self.aha_distance(current_row, row)
             if current_distance > max_distance:
                     max_distance = current_distance
@@ -71,7 +66,12 @@ class Table(object):
 
 
 if __name__ == "__main__":
-    csvFileName = './data/iris.csv'
+    #csvFileName = '../1/ninja/data/diabetes.csv'
+    csvFileName = './data/adult.csv'
     table = Table(csvFileName)
-    print table.headers
-    print table.row1
+    #print table.headers
+    #for col in table.cols:
+    #    col.show()
+    #for i,r in enumerate(table.rows):
+    #    print("Closest Row for Row %s : %s"%(str(r),str(table.minDistance(i,r))))
+    #    print("Farthest Row for Row %s : %s"%(str(r),str(table.maxDistance(i,r))))
