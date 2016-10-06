@@ -206,6 +206,6 @@ rank ,         name ,    med   ,  iqr
 
 ```
 
-### Runtimes of just 1 cross val
+### Runtimes of just 1 cross val in seconds.
 - 'diabetes.csv': {'knn': 3.22175717353821, 'mini': 1.2323052883148193, 'kd': 0.08319950103759766}
 - 'camel-1.0.csv': {'knn': 2.175856590270996, 'mini': 0.9243557453155518, 'kd': 0.05371499061584473}}
