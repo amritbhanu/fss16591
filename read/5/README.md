@@ -16,7 +16,7 @@
 
 * (iii3) **Patterns**: .
 
-* (iii3) **Assessment**: .
+* (iii3) **Results**: Object-oriented metrics (49%) were used nearly twice as often compared to traditional source code metrics (27%) or process metrics (24%). Chidamber and Kemerer's (CK) objected-oriented metrics were most frequently used. According to the selected studies there are significant differences between the metrics used in fault prediction performance. Objected-oriented and process metrics have been reported to be more successful in finding faults faults compared to any traditional size and complexity metrics.
 
-## (iv) Improvisations:
-- 
+## (iv) Future Work:
+- More studies should be performed on large industrial software systems to find metrics more relevant for the industry and to answer the question as to which metrics should be used in a given context.
