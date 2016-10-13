@@ -1,4 +1,4 @@
-# Paper 4 summary
+# Paper 7 summary
 
 ## (i) Reference : Ghotra, Baljinder, Shane McIntosh, and Ahmed E. Hassan. "Revisiting the impact of classification techniques on the performance of defect prediction models." In Proceedings of the 37th International Conference on Software Engineering-Volume 1, pp. 789-800. IEEE Press, 2015.
 
