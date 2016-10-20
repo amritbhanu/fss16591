@@ -12,7 +12,7 @@
 
 ## (iii) Brief Notes:
 
-* (iii1) **Motivation** : .
+* (iii1) **Motivation** : The ability to predict defect-prone software components would be valuable. Consequently, there have been many empirical studies to evaluate the performance of different techniques endeavouring to accomplish this effectively. However, no one technique dominates and so designing a reliable defect prediction model remains problematic. This paper seek to make sense of the many conflicting experimental results and understand which factors have the largest effect on predictive performance.
 
 * (iii2) **Related Work** : .
 
