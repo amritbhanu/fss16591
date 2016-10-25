@@ -44,7 +44,7 @@ if __name__ == '__main__':
             fa_dic[k][x] = []
             runtime[k][x] = 0
         print("### Dataset: "+k+ " ###\n")
-        csvFile = './data/'+k
+        csvFile = '../4/data/'+k
         table = Table(csvFile)
         for i in xrange(folds):
             shuffle(table.rows)
