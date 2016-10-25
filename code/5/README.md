@@ -6,6 +6,7 @@
 - Scott-knot analysis is done to generate pretty figures.
 - Run the code with **python CompareLearners.py**
 - All predictions on test data are done with k=1 for the 2 trees ie, Minibatch K means, KD tree and compared against Naive Bayes.
+
 ## Results
 
 ### Scott-knott analysis
