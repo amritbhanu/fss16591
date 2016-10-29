@@ -16,7 +16,7 @@
 
 * (iii1) **Motivation** : .
 
-* (iii2) **Related Work** : .
+* (iii2) **Related Work** : Recent research has raised concerns about parameter settings of classification techniques when applied to defect prediction models. For example, Koru et al. and Mende et al. point out that selecting different parameter settings can impact the performance of defect models. Jiang et al. and Tosun et al. also point out that the default parameter settings of research toolkits (e.g., R, Weka, Scikit-learn, MATLAB) are suboptimal. Although prior work suggests that defect prediction models may underperform if they are trained using suboptimal parameter settings, parameters are often left at their default values. Recent research voices concerns about the stability of performance estimates that are obtained from classification techniques when applied to defect prediction models. For example, Menzies et al. and Mittas et al. argue that unstable classification techniques can make replication of defect prediction studies more difficult. Like any form of classifier optimization, automated parameter optimization may increase the risk of overfitting, i.e., producing a classifier that is too specialized for the data from which it was trained to apply to other datasets. 
 
 * (iii3) **Informative Visualization**: 
 
