@@ -1,5 +1,5 @@
 # Week 7
-- Datasets used are 'camel-1.0.csv','arc.csv','ivy-2.0.csv','jedit-3.2.csv' which were downloaded from [Promise Repository] (http://openscience.us/repo/defect/ck/) and other one is diabetes.csv provided within ninja
+- Datasets used are 'camel-1.0.csv', 'arc.csv', 'ivy-2.0.csv', 'jedit-3.2.csv' which were downloaded from [Promise Repository] (http://openscience.us/repo/defect/ck/) and other one is diabetes.csv provided within ninja
 - Datasets are available [here] (https://github.com/amritbhanu/fss16591/tree/master/code/4/data)
 - Experiments are ran with 5 fold cross val ie. 80% training and 20% testing
 - Scott-knot analysis is done to generate pretty figures.
