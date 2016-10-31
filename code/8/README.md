@@ -5,8 +5,9 @@
 - all classification is using Naive Bayes
 
 ### Feature selection using j48 M=2 trick 
+-  (selected features/all features)
 
-| Datasets     | number of selected features   | precision | recall | irregularities|
+| Datasets     | selected features / All   | precision | recall | irregularities|
 | ------------- |:-------------:|:-------------:|:-------------:|:-------------:|
 |  diabetes.arff |  4 / 8 | 0.794 / 0.802 | 0.866 / 0.844 | |
 |  breast-cancer.arff | 3 / 9  | 0.756 / 0.778  | 0.925 / 0.836 | |
@@ -18,7 +19,7 @@
 ### Wrapper feature selection 
 - classifier subset eval and classifier used is NB (selected features/all features)
 
-| Datasets     | selected features   | precision | recall |  irregularities|
+| Datasets     | selected features / All    | precision | recall |  irregularities|
 | ------------- |:-------------:|:-------------:|:-------------:|:-------------:|
 |  diabetes.arff |  5 / 8 | 0.799 / 0.802 | 0.880 / 0.844 | |
 |  breast-cancer.arff | 6 / 9  | 0.772 / 0.778  | 0.891 / 0.836 | |
@@ -28,9 +29,9 @@
 |  weather.arff | 3 / 4 | 0.600 / 0.636 | 0.667 / 0.778 | |
 
 ### Filter feature selection 
-- infogain
+- infogain  (selected features/all features)
 
-| Datasets     | number of selected features   | precision | recall |  irregularities|
+| Datasets     | selected features / All    | precision | recall |  irregularities|
 | ------------- |:-------------:|:-------------:|:-------------:|:-------------:|
 |  diabetes.arff |  2 / 8 | 0.776 / 0.802 | 0.896 / 0.844 | |
 |  breast-cancer.arff | 2 / 9  | 0.764 / 0.778  | 0.935 / 0.836 | |
