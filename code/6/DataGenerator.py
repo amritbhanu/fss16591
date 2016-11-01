@@ -95,6 +95,17 @@ class DataGenerator(object):
             # recall for 1st target class
             # print np.array([j.stats()[0] for j in abcd()])[0]
 
+    # Dr.Menzies code.
+    def a12(list1, list2):
+        more = same = 0.0
+        for x in sorted(list1):
+            for y in sorted(list2):
+                if   x==y :
+                    same += 1
+                elif x > y :
+                    more += 1
+        return (more + 0.5*same) / (len(list1)*len(list2))
+
 
 if __name__ == "__main__":
     dg = DataGenerator("data.csv")
