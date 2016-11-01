@@ -12,6 +12,7 @@ class DataGenerator(object):
         # random.seed(50)
         table = Table(filename)
         self.data = table.rows
+        random.shuffle(self.data)
         self.data = self.data*20
         self.randomIndexType1 = []
         self.randomIndexType2 = []
@@ -19,7 +20,9 @@ class DataGenerator(object):
         self.randomDataType2 = []
         self.random_type1()
         self.random_type2()
-        self.newData = self.randomDataType1 + self.randomDataType2
+        random.shuffle(self.randomDataType1)
+        random.shuffle(self.randomDataType2)
+        self.newData =  self.randomDataType1 + self.randomDataType2 
 
     def random_type1(self):
         class_labels = ['Iris-setosa', 'Iris-versicolor', 'Iris-virginica']
@@ -70,11 +73,11 @@ class DataGenerator(object):
 
     def naiveBayes(self):
         for i in xrange(1, 21):
-            # print len(self.newData)
-            startIndex = (i-1)*100
+            random.shuffle(self.newData)
+            startIndex = 0
             endIndex = (i)*100
-            train = self.newData[startIndex:((startIndex + endIndex/2)-1)]
-            test = self.newData[(startIndex + endIndex)/2:endIndex]
+            train = self.newData[0:(endIndex/2)-1]
+            test = self.newData[(endIndex/2):endIndex]
             # print train, test
             train_label = []
             test_label = []
