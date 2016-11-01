@@ -1,6 +1,7 @@
 from Table import Table
 import random
 import numpy as np
+import math
 from sklearn.naive_bayes import GaussianNB
 from ABCD import ABCD
 
@@ -9,17 +10,18 @@ class DataGenerator(object):
     """docstring for DataGenerator"""
 
     def __init__(self, filename):
-        # random.seed(50)
         table = Table(filename)
         self.data = table.rows
-        random.shuffle(self.data)
-        self.data = self.data*20
+        while len(self.data) < 2000:
+            self.data.append(table.rows[random.randint(0, len(table.rows) - 1)])
         self.randomIndexType1 = []
         self.randomIndexType2 = []
         self.randomDataType1 = []
         self.randomDataType2 = []
         self.random_type1()
         self.random_type2()
+        # print self.randomDataType1
+        # print self.randomDataType2
         random.shuffle(self.randomDataType1)
         random.shuffle(self.randomDataType2)
         self.newData =  self.randomDataType1 + self.randomDataType2 
@@ -72,12 +74,20 @@ class DataGenerator(object):
 
 
     def naiveBayes(self):
-        for i in xrange(1, 21):
-            random.shuffle(self.newData)
-            startIndex = 0
-            endIndex = (i)*100
-            train = self.newData[0:(endIndex/2)-1]
-            test = self.newData[(endIndex/2):endIndex]
+        list1 = list2 = []
+        a12Score = olda12Score = 0
+        for i in xrange(0, 20):
+            if i==0:
+                endIndexTrainData = 100
+                startIndex = 0
+                endIndexTestData = 100
+            else:
+                endIndexTrainData = (i)*100
+                endIndexTestData = (i+1)*100
+                startIndex = endIndexTrainData + 1
+            # print startIndex, endIndexTrainData, endIndexTestData
+            train = self.newData[0:endIndexTrainData]
+            test = self.newData[startIndex:endIndexTestData]
             # print train, test
             train_label = []
             test_label = []
@@ -99,13 +109,33 @@ class DataGenerator(object):
             predict=NB.predict(data_test)
             # print predict
             abcd = ABCD(before=test_label, after=predict)
+            recall = np.array([j.stats()[0] for j in abcd()])
             # recall for 1st target class
-            print "Era #" + str(i) + ":" + str(np.array([j.stats()[0] for j in abcd()])[0])
-            print "Era #" + str(i) + ":" + str(np.array([j.stats()[0] for j in abcd()])[1])
-            print "Era #" + str(i) + ":" + str(np.array([j.stats()[0] for j in abcd()])[2])
+            class1 = recall[0]
+            class2 = recall[1]
+            try:
+                class3 = recall[2]
+            except:
+                class3 = 0
+            print "Era " + str(i)
+            print "Class 1: " + str(class1)
+            print "Class 2: " + str(class2)
+            print "Class 3: " + str(class3)
+            if i == 0:
+                list1 = [class1, class2, class3]
+                list2 = list1
+            else:
+                list1 = list2
+                list2 = [class1, class2, class3]
+                olda12Score = a12Score
+                a12Score = self.a12(list1, list2)
+            print "A12 Score: " + str(a12Score)
+            if math.fabs(olda12Score - a12Score) > 0.2 * olda12Score:
+                print "Anamoly detected!!"
+            print ""
 
     # Dr.Menzies code.
-    def a12(list1, list2):
+    def a12(self, list1, list2):
         more = same = 0.0
         for x in sorted(list1):
             for y in sorted(list2):
