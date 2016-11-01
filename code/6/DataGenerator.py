@@ -12,22 +12,24 @@ class DataGenerator(object):
         # random.seed(50)
         table = Table(filename)
         self.data = table.rows
+        self.data = self.data*20
         self.randomIndexType1 = []
         self.randomIndexType2 = []
         self.randomDataType1 = []
         self.randomDataType2 = []
         self.random_type1()
         self.random_type2()
+        print len(self.randomDataType1), len(self.randomDataType2)
         self.newData = self.randomDataType1 + self.randomDataType2
 
     def random_type1(self):
-        class_labels = ['win', 'draw', 'loss']
+        class_labels = ['Iris-setosa', 'Iris-versicolor', 'Iris-virginica']
         label = class_labels[0]
 
         while len(self.randomIndexType1) < 500:
             randIndex = random.randint(0, len(self.data) - 1)
             randomRow = self.data[randIndex]
-            if ((randomRow[-1] == label) & (not randomRow[-1] in self.randomIndexType1)):
+            if ((randomRow[-1] == label) & (randIndex not in self.randomIndexType1)):
                 self.randomIndexType1.append(randIndex)
                 self.randomDataType1.append(randomRow)
 
@@ -35,40 +37,41 @@ class DataGenerator(object):
         while len(self.randomIndexType1) < 1000:
             randIndex = random.randint(0, len(self.data) - 1)
             randomRow = self.data[randIndex]
-            if ((randomRow[-1] == label) & (not randomRow[-1] in self.randomIndexType1)):
+            if ((randomRow[-1] == label) & (randIndex not in self.randomIndexType1)):
                 self.randomIndexType1.append(randIndex)
                 self.randomDataType1.append(randomRow)
 
     def random_type2(self):
-        class_labels = ['win', 'draw', 'loss']
+        class_labels = ['Iris-setosa', 'Iris-versicolor', 'Iris-virginica']
         label = class_labels[0]
 
         while len(self.randomIndexType2) < 100:
             randIndex = random.randint(0, len(self.data) - 1)
             randomRow = self.data[randIndex]
-            if ((randomRow[-1] == label) & (not randomRow[-1] in self.randomIndexType2)):
+            if ((randomRow[-1] == label) & (randIndex not in self.randomIndexType2)):
                 self.randomIndexType2.append(randIndex)
                 self.randomDataType2.append(randomRow)
 
         label = class_labels[1]
-        while len(self.randomIndexType2) < 300:
+        while len(self.randomIndexType2) < 400:
             randIndex = random.randint(0, len(self.data) - 1)
             randomRow = self.data[randIndex]
-            if ((randomRow[-1] == label) & (not randomRow[-1] in self.randomIndexType2)):
+            if ((randomRow[-1] == label) & (randIndex not in self.randomIndexType2)):
                 self.randomIndexType2.append(randIndex)
                 self.randomDataType2.append(randomRow)
 
         label = class_labels[2]
-        while len(self.randomIndexType2) < 600:
+        while len(self.randomIndexType2) < 1000:
             randIndex = random.randint(0, len(self.data) - 1)
             randomRow = self.data[randIndex]
-            if ((randomRow[-1] == label) & (not randomRow[-1] in self.randomIndexType2)):
+            if ((randomRow[-1] == label) & (randIndex not in self.randomIndexType2)):
                 self.randomIndexType2.append(randIndex)
                 self.randomDataType2.append(randomRow)
 
 
     def naiveBayes(self):
         for i in xrange(1, 21):
+            print len(self.newData)
             print "Era #" + str(i) + ":"
             startIndex = (i-1)*100
             endIndex = (i)*100
@@ -84,16 +87,13 @@ class DataGenerator(object):
             for x in test:
                 test_label.append(x[-1])
                 data_test.append(x[:-1])
-            for i in xrange(len(data_train)):
-                print data_train[i], train_label[i]
-            # print data_test
             NB = GaussianNB()
             NB.fit(data_train,train_label)
             predict=NB.predict(data_test)
-            # print predict
-            abcd = ABCD(before=test_label, after=predict)
+            print predict
+            # abcd = ABCD(before=test_label, after=predict)
             # recall for 1st target class
-            print np.array([j.stats()[0] for j in abcd()])[0]
+            # print np.array([j.stats()[0] for j in abcd()])[0]
 
 
 if __name__ == "__main__":
