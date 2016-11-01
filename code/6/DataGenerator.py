@@ -101,6 +101,8 @@ class DataGenerator(object):
             abcd = ABCD(before=test_label, after=predict)
             # recall for 1st target class
             print "Era #" + str(i) + ":" + str(np.array([j.stats()[0] for j in abcd()])[0])
+            print "Era #" + str(i) + ":" + str(np.array([j.stats()[0] for j in abcd()])[1])
+            print "Era #" + str(i) + ":" + str(np.array([j.stats()[0] for j in abcd()])[2])
 
     # Dr.Menzies code.
     def a12(list1, list2):
