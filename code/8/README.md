@@ -28,8 +28,8 @@
 |  vote.arff | 3 / 16 | 0.947 / 0.944 | 0.940 / 0.891 | |
 |  weather.arff | 3 / 4 | 0.600 / 0.636 | 0.667 / 0.778 | |
 
-### Filter feature selection 
-- infogain  (selected features/all features)
+### CFS Subset Eval feature selection 
+- (selected features/all features)
 
 | Datasets     | selected features / All    | precision | recall |  irregularities|
 | ------------- |:-------------:|:-------------:|:-------------:|:-------------:|
