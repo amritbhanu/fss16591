@@ -17,8 +17,6 @@ class Table(object):
         except ValueError: return val, Sym
 
     def add_rows(self):
-        # print "Raw Data: " + str(self.raw_data)
-        # print "Data: " + str(next(self.raw_data))
         for index, row in enumerate(self.raw_data):
             if index != 0:
                 for colNum, item in enumerate(row):
@@ -41,35 +39,35 @@ class Table(object):
         return row
 
     # Forumla exactly taken from Aha's paper.
-    def distance(self, r1, r2):
-        distance = 0
-        for col, row1, row2 in zip(self.cols, r1, r2):
-            distance += col.dist(row1, row2)
-        if distance < 0:
-            distance = 0
-            for col, row1, row2 in zip(self.cols, r2, r1):
-                distance += col.dist(row1, row2)
-        return math.sqrt(distance)
+    # def distance(self, r1, r2):
+    #     distance = 0
+    #     for col, row1, row2 in zip(self.cols, r1, r2):
+    #         distance += col.dist(row1, row2)
+    #     if distance < 0:
+    #         distance = 0
+    #         for col, row1, row2 in zip(self.cols, r2, r1):
+    #             distance += col.dist(row1, row2)
+    #     return math.sqrt(distance)
 
-    def minDistance(self, current_row, other_rows):
-        min_distance = 10**32
-        for i,row in enumerate(other_rows):
-            current_distance = self.distance(current_row, row)
-            if current_distance < min_distance:
-                min_distance = current_distance
-                min_row = row
-                index=i
-        return min_row, index
+    # def minDistance(self, current_row, other_rows):
+    #     min_distance = 10**32
+    #     for i,row in enumerate(other_rows):
+    #         current_distance = self.distance(current_row, row)
+    #         if current_distance < min_distance:
+    #             min_distance = current_distance
+    #             min_row = row
+    #             index=i
+    #     return min_row, index
 
-    def maxDistance(self, index, row):
-        max_distance = 10**-32
-        current_row = self.rows[index]
-        other_rows = self.rows[:index]
-        if index < len(self.rows):
-            other_rows += self.rows[index+1:]
-        for i,row in enumerate(other_rows):
-            current_distance = self.distance(current_row, row)
-            if current_distance > max_distance:
-                    max_distance = current_distance
-                    max_row = row
-        return max_row
+    # def maxDistance(self, index, row):
+    #     max_distance = 10**-32
+    #     current_row = self.rows[index]
+    #     other_rows = self.rows[:index]
+    #     if index < len(self.rows):
+    #         other_rows += self.rows[index+1:]
+    #     for i,row in enumerate(other_rows):
+    #         current_distance = self.distance(current_row, row)
+    #         if current_distance > max_distance:
+    #                 max_distance = current_distance
+    #                 max_row = row
+    #     return max_row

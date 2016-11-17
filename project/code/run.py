@@ -7,7 +7,12 @@ def cli():
 
 @cli.command()
 @click.argument('files')
-def f(files):
+@click.option('--cv', nargs=2, type=int,
+              help="m x n validations, specify m & n. E.g: --cv 5 5")
+@click.option('--l', nargs=2, type=str,
+              help="learner code to be executed. "
+                   "If none, all learners will be executed.")
+def f(files, cv, l):
     """
         Enter file or directory path.
     """
@@ -20,4 +25,7 @@ def f(files):
     else:
         click.echo("Unexpected content.")
         sys.exit()
-    handler = Handler(list_of_files)
+    # I need to fix this.
+    m = cv[0] if len(cv) > 0 else None
+    n = cv[1] if len(cv) > 1 else None
+    handler = Handler(list_of_files, m, n)
