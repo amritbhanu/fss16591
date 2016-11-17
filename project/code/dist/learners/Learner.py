@@ -1,4 +1,6 @@
 from config import LEARNERS
+import sys
+sys.dont_write_bytecode = True
 
 class Learner(object):
     """docstring for Learner"""
@@ -16,5 +18,5 @@ class LearnerExecutor(object):
         super(LearnerExecutor, self).__init__()
         self.list_of_learners = list_of_learners
 
-    def run_all():
+    def run_all(self):
         pass

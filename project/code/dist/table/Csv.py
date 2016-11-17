@@ -48,8 +48,4 @@ class Csv(object):
                     if len(row) > 0:
                         yield prep(row) if prep else row
 
-
-if __name__ == "__main__":
-    csvFileName = './data/iris.csv'
-    csvReader = Csv(csvFileName)
         

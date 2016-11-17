@@ -1,3 +1,6 @@
+import sys
+sys.dont_write_bytecode = True
+
 class Data(object):
     """docstring for Data"""
     def __init__(self):
@@ -16,25 +19,25 @@ class Data(object):
         return self.results
 
     def set_train_data(self, content):
-        self.train_data = content
+        self.train_data = [row[:-1] for row in content]
 
     def get_train_data(self):
         return self.train_data
 
     def set_test_data(self, content):
-        self.test_data = content
+        self.test_data = [row[:-1] for row in content]
 
     def get_test_data(self):
         return self.test_data
 
-    def set_train_label(self):
-        self.train_label = [row[-1] for row in self.train_data]
+    def set_train_label(self, labels):
+        self.train_label = labels
 
     def get_train_label(self):
         return self.train_label
 
-    def set_test_label(self):
-        self.test_label = [row[-1] for row in self.test_data]
+    def set_test_label(self,labels):
+        self.test_label = labels
 
     def get_test_label(self):
         return self.test_label

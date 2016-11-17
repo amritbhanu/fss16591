@@ -1,7 +1,7 @@
 from .Learner import Learner
-from sklearn import neighbors
 from dist.stats.ABCD import ABCD
 import numpy as np
+from sklearn.tree import DecisionTreeClassifier
 import sys
 sys.dont_write_bytecode = True
 
@@ -11,9 +11,9 @@ class KNN(Learner):
         super(KNN, self).__init__(**kwargs)
 
     def run(self):
-        knn = neighbors.KNeighborsClassifier(n_neighbors=8)
-        knn.fit(self.data.get_train_data(), self.data.get_train_label())
-        predict = knn.predict(self.data.get_test_data())
+        DT = DecisionTreeClassifier(criterion='entropy')
+        DT.fit(self.data.get_train_data(), self.data.get_train_label())
+        predict = DT.predict(self.data.get_test_data())
         # print predict
         abcd = ABCD(before=self.data.get_test_label(), after=predict)
         stats = np.array([j.stats() for j in abcd()])

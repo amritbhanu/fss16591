@@ -1,7 +1,7 @@
-import os
 from dist.table.Csv import Csv
 from dist.table.Table import Table
-
+import sys
+sys.dont_write_bytecode = True
 
 class Read(object):
     """docstring for Read"""

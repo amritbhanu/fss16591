@@ -1,5 +1,5 @@
 from .Learner import Learner
-from sklearn import neighbors
+from sklearn.svm import SVC
 from dist.stats.ABCD import ABCD
 import numpy as np
 import sys
@@ -11,9 +11,9 @@ class KNN(Learner):
         super(KNN, self).__init__(**kwargs)
 
     def run(self):
-        knn = neighbors.KNeighborsClassifier(n_neighbors=8)
-        knn.fit(self.data.get_train_data(), self.data.get_train_label())
-        predict = knn.predict(self.data.get_test_data())
+        svm = SVC(kernel='linear')
+        svm.fit(self.data.get_train_data(), self.data.get_train_label())
+        predict = svm.predict(self.data.get_test_data())
         # print predict
         abcd = ABCD(before=self.data.get_test_label(), after=predict)
         stats = np.array([j.stats() for j in abcd()])
