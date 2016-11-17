@@ -1,6 +1,6 @@
 import os
-from dist.data.Csv import Csv
-from dist.data.Table import Table
+from dist.table.Csv import Csv
+from dist.table.Table import Table
 
 
 class Read(object):

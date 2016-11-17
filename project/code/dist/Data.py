@@ -2,12 +2,6 @@ class Data(object):
     """docstring for Data"""
     def __init__(self):
         super(Data, self).__init__()
-        # self.table = \
-        # self.results = \
-        # self.train_data = \
-        # self.train_label = \
-        # self.test_data = \
-        # self.test_label = None
 
     def set_content(self, content):
         self.table = content

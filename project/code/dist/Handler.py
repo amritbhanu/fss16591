@@ -18,7 +18,6 @@ class Handler(object):
 
     def cross_validate(self, data, m=None, n=None):
         len_of_content = len(data.get_content())
-        # print len_of_content
         if not m: m = len_of_content/2
         if not n: n = len_of_content/2
         data.set_train_data([data.get_content()[randint(0, len_of_content - 1)]

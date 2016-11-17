@@ -15,12 +15,9 @@ def f(files):
     if os.path.isfile(files):
         list_of_files.append(files)
     elif os.path.isdir(files):
-        # print os.listdir(files)
         list_of_files = [files+file for file in os.listdir(files)
                          if os.path.isfile(files+file)]
     else:
         click.echo("Unexpected content.")
         sys.exit()
-    print list_of_files
     handler = Handler(list_of_files)
-    # handler.test()

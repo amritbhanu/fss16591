@@ -1,6 +1,6 @@
 import sys, math
-from Num import Num
-from Sym import Sym
+from dist.table.Num import Num
+from dist.table.Sym import Sym
 
 
 class Table(object):
