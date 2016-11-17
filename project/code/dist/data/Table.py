@@ -1,46 +1,47 @@
 import sys, math
 from Num import Num
 from Sym import Sym
-from Csv import Csv
-import sys
-sys.dont_write_bytecode = True
+
 
 class Table(object):
 
-    def __init__(self, csvFileName):
-        self.csv = Csv(csvFileName) 
-        self.headers = self.csv.next
+    def __init__(self, raw_data):
+        self.raw_data = raw_data
+        self.headers = self.raw_data.next()
         self.rows = []
         self.cols = []
-        self.addRows()
-        self.cleanRows()
+        self.add_rows()
 
     def typeOfItem(self, val):
         try: return float(val), Num
         except ValueError: return val, Sym
 
-    def addRows(self):
-        for index, row in enumerate(self.csv.parse()):
+    def add_rows(self):
+        # print "Raw Data: " + str(self.raw_data)
+        # print "Data: " + str(next(self.raw_data))
+        for index, row in enumerate(self.raw_data):
             if index != 0:
-                self.rows.append(row)
                 for colNum, item in enumerate(row):
-                    val, classType = self.typeOfItem(item)
-                    if classType is Num and index == 1:
-                        self.cols.append(Num(self.headers[colNum]))
-                    elif classType is Sym and index == 1:
-                        self.cols.append(Sym(self.headers[colNum]))
+                    if index == 1:
+                        val, classType = self.typeOfItem(item)
+                        if classType is Num: 
+                            self.cols.append(Num(self.headers[colNum]))
+                        elif classType is Sym:
+                            self.cols.append(Sym(self.headers[colNum]))
                     self.cols[colNum].add(item)
+                row = self.clean_row(row)
+                self.rows.append(row)
 
-    def cleanRows(self):
-        for row in self.rows:
-            for i in xrange(len(row)):
-                try:
-                    row[i] = float(row[i])
-                except:
-                    row[i] = 0
+    def clean_row(self, row):
+        for i in xrange(len(row)):
+            try:
+                row[i] = float(row[i])
+            except:
+                row[i] = 0.0
+        return row
 
     # Forumla exactly taken from Aha's paper.
-    def aha_distance(self, r1, r2):
+    def distance(self, r1, r2):
         distance = 0
         for col, row1, row2 in zip(self.cols, r1, r2):
             distance += col.dist(row1, row2)
@@ -53,7 +54,7 @@ class Table(object):
     def minDistance(self, current_row, other_rows):
         min_distance = 10**32
         for i,row in enumerate(other_rows):
-            current_distance = self.aha_distance(current_row, row)
+            current_distance = self.distance(current_row, row)
             if current_distance < min_distance:
                 min_distance = current_distance
                 min_row = row
@@ -67,21 +68,8 @@ class Table(object):
         if index < len(self.rows):
             other_rows += self.rows[index+1:]
         for i,row in enumerate(other_rows):
-            current_distance = self.aha_distance(current_row, row)
+            current_distance = self.distance(current_row, row)
             if current_distance > max_distance:
                     max_distance = current_distance
                     max_row = row
         return max_row
-
-
-if __name__ == "__main__":
-    csvFileName = './data/ant-1.7.csv'
-    table = Table(csvFileName)
-    for row in table.rows:
-        print row
-    #print table.headers
-    #for col in table.cols:
-    #    col.show()
-    #for i,r in enumerate(table.rows):
-    #    print("Closest Row for Row %s : %s"%(str(r),str(table.minDistance(i,r))))
-    #    print("Farthest Row for Row %s : %s"%(str(r),str(table.maxDistance(i,r))))

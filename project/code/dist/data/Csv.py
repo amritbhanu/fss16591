@@ -49,8 +49,6 @@ class Csv(object):
                         yield prep(row) if prep else row
 
 
-
-
 if __name__ == "__main__":
     csvFileName = './data/iris.csv'
     csvReader = Csv(csvFileName)
