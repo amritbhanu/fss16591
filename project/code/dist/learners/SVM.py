@@ -5,10 +5,10 @@ import numpy as np
 import sys
 sys.dont_write_bytecode = True
 
-class KNN(Learner):
-    """docstring for KNN"""
-    def __init__(self, **kwargs):
-        super(KNN, self).__init__(**kwargs)
+class SVM(Learner):
+    """docstring for SVM"""
+    def __init__(self, *args):
+        super(SVM, self).__init__(*args)
 
     def run(self):
         svm = SVC(kernel='linear')

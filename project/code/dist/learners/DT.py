@@ -1,14 +1,14 @@
-from .Learner import Learner
+from dist.learners.Learner import Learner
 from dist.stats.ABCD import ABCD
 import numpy as np
 from sklearn.tree import DecisionTreeClassifier
 import sys
 sys.dont_write_bytecode = True
 
-class KNN(Learner):
-    """docstring for KNN"""
-    def __init__(self, **kwargs):
-        super(KNN, self).__init__(**kwargs)
+class DT(Learner):
+    """docstring for DT"""
+    def __init__(self, *args):
+        super(DT, self).__init__(*args)
 
     def run(self):
         DT = DecisionTreeClassifier(criterion='entropy')

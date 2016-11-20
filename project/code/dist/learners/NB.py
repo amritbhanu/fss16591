@@ -1,14 +1,14 @@
-from .Learner import Learner
+from dist.learners.Learner import Learner
 from sklearn.naive_bayes import GaussianNB
 from dist.stats.ABCD import ABCD
 import numpy as np
 import sys
 sys.dont_write_bytecode = True
 
-class NaiveBayes(Learner):
-    """docstring for NaiveBayes"""
+class NB(Learner):
+    """docstring for NB"""
     def __init__(self, *args):
-        super(NaiveBayes, self).__init__(*args)
+        super(NB, self).__init__(*args)
 
     def run(self):
         NB = GaussianNB()

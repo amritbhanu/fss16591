@@ -5,10 +5,11 @@ import numpy as np
 import sys
 sys.dont_write_bytecode = True
 
+
 class KNN(Learner):
     """docstring for KNN"""
-    def __init__(self, **kwargs):
-        super(KNN, self).__init__(**kwargs)
+    def __init__(self, *args):
+        super(KNN, self).__init__(*args)
 
     def run(self):
         knn = neighbors.KNeighborsClassifier(n_neighbors=8)

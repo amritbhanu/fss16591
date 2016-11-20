@@ -3,6 +3,7 @@ from dist.table.Table import Table
 import sys
 sys.dont_write_bytecode = True
 
+
 class Read(object):
     """docstring for Read"""
     def __init__(self, filename, data):

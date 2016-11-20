@@ -1,27 +1,31 @@
 from dist.Data import Data
+from dist.Result import Result
 from dist.Read import Read
-from random import shuffle,randint,random,seed
-from dist.learners.Learner import LearnerExecutor
+from random import shuffle, randint, random, seed
+from dist.learners.LearnerExecutor import LearnerExecutor
 from sklearn.model_selection import StratifiedKFold
 from sklearn.neighbors import NearestNeighbors
-from dist.stats.sk import rdiv
+from dist.stats.sk import rdivDemo
 import numpy as np
 import pickle
 import sys
 sys.dont_write_bytecode = True
 
+
 class Handler(object):
-    """docstring for Handler"""
-    def __init__(self, list_of_files, m, n):
+    """
+        This class is the entry point to any learners.
+    """
+    def __init__(self, list_of_files, m, n, list_of_learners):
         super(Handler, self).__init__()
         self.list_of_files = list_of_files
+        self.list_of_learners = list_of_learners
         seed(0)
-        dict_of_data = {}
         for index, file in enumerate(list_of_files):
             data = Data()
+            result = Result()
             Read(file, data)
-            self.cross_validate(data, m, n)
-            # dict_of_data[index] = data.get_results()
+            self.cross_validate(data, result, m, n)
 
     def split(self,inp, out, n_folds):
         skf = StratifiedKFold(n_splits=n_folds, random_state=None, shuffle=True)
@@ -69,18 +73,18 @@ class Handler(object):
             label_train = [1] * len(pos_train) + [0] * len(neg_train)
             return data_train1, label_train
 
-
-    def cross_validate(self, data, m, n):
-        if not n: splits=2
-        else: splits=n
-        if not m: folds=1
-        else: folds=m
-        for _ in folds:
+    def cross_validate(self, data, result, m, n):
+        if not n: splits = 2
+        else: splits = n
+        if not m: folds = 1
+        else: folds = m
+        for _ in xrange(folds):
             shuffle(data.get_content())
-            labels=[1 if row[-1]>0 else 0 for row in data.get_content()]
-            for train_inp, train_out, test_inp, test_out in self.split(data.get_content(), labels, splits):
+            labels = [1 if row[-1] > 0 else 0 for row in data.get_content()]
+            content = self.split(data.get_content(), labels, splits)
+            for train_inp, train_out, test_inp, test_out in content:
                 ## Smoting the highly inbalanced class
-                train_inp,train_out=self.balance(train_inp,train_out,neighbors=5)
+                train_inp,train_out = self.balance(train_inp,train_out, neighbors=5)
 
                 data.set_train_data(train_inp)
                 data.set_train_label(train_out)
@@ -88,23 +92,25 @@ class Handler(object):
                 data.set_test_label(test_out)
 
                 ## here run all learners
-                self.run_learners(data)
+                self.run_learners(data, result)
 
                 ## report results
-                ## Format = For each dataset, and each measure, we will have five learners
-                l=[['knn',1,1,1,1,1],['nb',1,0.5,0.5,1,1],['SVM',1,1,1,1,1],['RF',1,1,1,1,1],['DT',1,1,1,1,1],['LR',1,1,1,1,1]]
+                ## Format = For each dataset, and each learner, we will have five measures
+                l = [['KNN', 1, 1, 1, 1, 1], ['NB', 1, 0.5, 0.5, 1, 1],
+                     ['SVM', 1, 1, 1, 1, 1], ['RF', 1, 1, 1, 1, 1],
+                     ['DT', 1, 1, 1, 1, 1], ['LR', 1, 1, 1, 1, 1]]
                 self.stats(l)
 
                 ##dump results:
-                f={'dataset1':{'learner1':{'measure1':[1,1,1,1]}}}
-                with open('dump/result.pickle', 'wb') as handle:
+                f = {'dataset1':{'learner1':{'measure1':[1,1,1,1]}}}
+                with open('./dump/result.pickle', 'wb') as handle:
                     pickle.dump(f, handle)
 
-    def run_learners(self, data):
-        learner = LearnerExecutor(data)
+    def run_learners(self, data, result):
+        LearnerExecutor(self.list_of_learners, data, result)
 
-    def stats(self,dict=[]):
-        print(rdiv(dict))
+    def stats(self, dict=[]):
+        rdivDemo(dict)
 
     # Just for testing
     def test(self):

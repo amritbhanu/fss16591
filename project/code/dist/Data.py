@@ -1,6 +1,7 @@
 import sys
 sys.dont_write_bytecode = True
 
+
 class Data(object):
     """docstring for Data"""
     def __init__(self):
@@ -11,12 +12,6 @@ class Data(object):
 
     def get_content(self):
         return self.table
-
-    def set_results(self, results):
-        self.results = results
-
-    def get_results(self):
-        return self.results
 
     def set_train_data(self, content):
         self.train_data = [row[:-1] for row in content]
