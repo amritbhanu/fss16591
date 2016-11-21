@@ -12,4 +12,7 @@ class LearnerExecutor(object):
             self.run_learner(learner, data, result)
 
     def run_learner(self, learner, data, result):
-        LEARNERS[learner](data)
+        l = LEARNERS[learner](data)
+        r = l.run()
+        content = [str(learner)] + [round(val, 3) for val in r]
+        result.set_content(content)

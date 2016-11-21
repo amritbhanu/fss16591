@@ -12,4 +12,4 @@ class Result(object):
         self.content.append(content)
 
     def get_content(self):
-        return self.table
+        return self.content

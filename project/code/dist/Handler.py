@@ -84,7 +84,9 @@ class Handler(object):
             content = self.split(data.get_content(), labels, splits)
             for train_inp, train_out, test_inp, test_out in content:
                 ## Smoting the highly inbalanced class
-                train_inp,train_out = self.balance(train_inp,train_out, neighbors=5)
+                train_inp, train_out = self.balance(train_inp,
+                                                    train_out,
+                                                    neighbors=5)
 
                 data.set_train_data(train_inp)
                 data.set_train_label(train_out)
@@ -93,13 +95,10 @@ class Handler(object):
 
                 ## here run all learners
                 self.run_learners(data, result)
-
+                # print result.get_content()
                 ## report results
                 ## Format = For each dataset, and each learner, we will have five measures
-                l = [['KNN', 1, 1, 1, 1, 1], ['NB', 1, 0.5, 0.5, 1, 1],
-                     ['SVM', 1, 1, 1, 1, 1], ['RF', 1, 1, 1, 1, 1],
-                     ['DT', 1, 1, 1, 1, 1], ['LR', 1, 1, 1, 1, 1]]
-                self.stats(l)
+                self.stats(result.get_content())
 
                 ##dump results:
                 f = {'dataset1':{'learner1':{'measure1':[1,1,1,1]}}}
