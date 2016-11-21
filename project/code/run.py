@@ -16,6 +16,7 @@ def cli():
 @click.option('--l', type=click.Choice([k for k in LEARNERS]), multiple=True,
               help="Learner to be executed. "
                    "If none, all learners will be executed.")
+
 def f(files, cv, l):
     """
         Enter file or directory path.

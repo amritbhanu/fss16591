@@ -112,7 +112,7 @@ class Handler(object):
         print res
 
         ##dump results:
-        with open('./dump/'+filename+'.pickle', 'wb') as handle:
+        with open('./dump/'+filename.split('/')[-1]+'.pickle', 'wb') as handle:
             pickle.dump(res, handle)
 
     def run_learners(self, data, result):
