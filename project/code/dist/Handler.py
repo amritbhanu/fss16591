@@ -113,8 +113,3 @@ class Handler(object):
 
     def stats(self, dict=[]):
         rdivDemo(dict)
-
-    # Just for testing
-    def test(self):
-        print self.list_of_files
-        
