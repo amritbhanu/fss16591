@@ -22,8 +22,8 @@ def f(files, cv, l):
         Options are:
             1) m x n cross-validations
             2) choice of learner to be executed
-
     """
+
     if os.path.isfile(files):
         list_of_files = [files]
     elif os.path.isdir(files):

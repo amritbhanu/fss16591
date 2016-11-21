@@ -9,6 +9,8 @@ from dist.stats.sk import rdivDemo
 import numpy as np
 import pickle
 import sys
+import unicodedata
+
 sys.dont_write_bytecode = True
 
 
@@ -27,7 +29,7 @@ class Handler(object):
             Read(file, data)
             try:
                 data.get_content()
-                self.cross_validate(data, result, m, n)
+                self.cross_validate(data, result, m, n,filename=file)
             except:
                 continue
 
@@ -77,7 +79,7 @@ class Handler(object):
             label_train = [1] * len(pos_train) + [0] * len(neg_train)
             return data_train1, label_train
 
-    def cross_validate(self, data, result, m, n):
+    def cross_validate(self, data, result, m, n,filename=''):
         if not n: splits = 2
         else: splits = n
         if not m: folds = 1
@@ -98,15 +100,20 @@ class Handler(object):
                 ## here run all learners
                 self.run_learners(data, result)
 
+        res={}
+        f={}
+        filename = unicodedata.normalize('NFKD', filename).encode('ascii', 'ignore')
         for k, v in result.scores.iteritems():
             print k
+            f[k]=v()
             self.stats(v())
             print ""
+        res[filename]=f
+        print res
 
         ##dump results:
-        f = {'dataset1':{'learner1':{'measure1':[1,1,1,1]}}}
-        with open('./dump/result.pickle', 'wb') as handle:
-            pickle.dump(f, handle)
+        with open('./dump/'+filename+'.pickle', 'wb') as handle:
+            pickle.dump(res, handle)
 
     def run_learners(self, data, result):
         LearnerExecutor(self.list_of_learners, data, result)
