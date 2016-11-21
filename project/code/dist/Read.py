@@ -11,16 +11,11 @@ class Read(object):
         self.filename = filename
         # print self.filename
         self.data = data
-        if 'arff' == (self.filename).split(".")[-1]:
-            self.arff_reader()
-        elif 'csv' == (self.filename).split(".")[-1]:
+        if 'csv' == (self.filename).split(".")[-1]:
             self.csv_reader()
+            self.build_table()
         else:
-            Exception("Unsupported File!")
-        self.build_table()
-
-    def arff_reader(self):
-        Exception("Not Yet Implemented!")
+            print "Unsupported File: " + filename
 
     def csv_reader(self):
         csv = Csv(self.filename)
@@ -29,3 +24,4 @@ class Read(object):
     def build_table(self):
         table = Table(self.rows)
         self.data.set_content(table.rows)
+        return True

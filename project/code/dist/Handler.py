@@ -25,7 +25,11 @@ class Handler(object):
             data = Data()
             result = Result()
             Read(file, data)
-            self.cross_validate(data, result, m, n)
+            try:
+                data.get_content()
+                self.cross_validate(data, result, m, n)
+            except:
+                continue
 
     def split(self,inp, out, n_folds):
         skf = StratifiedKFold(n_splits=n_folds, random_state=None, shuffle=True)
