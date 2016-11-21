@@ -13,6 +13,8 @@ class LearnerExecutor(object):
 
     def run_learner(self, learner, data, result):
         l = LEARNERS[learner](data)
-        r = l.run()
-        content = [str(learner)] + [round(val, 3) for val in r]
-        result.set_content(content)
+        recall, precision, accuracy, f_score = l.run()
+        result.set_recall(learner, round(recall, 3))
+        result.set_precision(learner, round(precision, 3))
+        result.set_accuracy(learner, round(accuracy, 3))
+        result.set_f_score(learner, round(f_score, 3))

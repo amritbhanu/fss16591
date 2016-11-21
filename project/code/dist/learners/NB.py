@@ -5,6 +5,7 @@ import numpy as np
 import sys
 sys.dont_write_bytecode = True
 
+
 class NB(Learner):
     """docstring for NB"""
     def __init__(self, *args):
@@ -23,4 +24,5 @@ class NB(Learner):
         else:
             labelone = 1
         # return recall (0), prec(3), accuracy(4), fscore(5)
-        return stats[labelone][0], stats[labelone][3], stats[labelone][4], stats[labelone][5]
+        return stats[labelone][0], stats[labelone][3], \
+               stats[labelone][4], stats[labelone][5]

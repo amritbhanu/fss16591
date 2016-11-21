@@ -1,4 +1,4 @@
-from .Learner import Learner
+from dist.learners.Learner import Learner
 from sklearn import neighbors
 from dist.stats.ABCD import ABCD
 import numpy as np
@@ -24,7 +24,5 @@ class KNN(Learner):
         else:
             labelone = 1
         #return recall (0), prec(3), accuracy(4), fscore(5)
-        return [stats[labelone][0],
-                stats[labelone][3],
-                stats[labelone][4],
-                stats[labelone][5]]
+        return stats[labelone][0], stats[labelone][3], \
+               stats[labelone][4], stats[labelone][5]

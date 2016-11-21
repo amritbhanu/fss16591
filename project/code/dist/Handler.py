@@ -49,10 +49,10 @@ class Handler(object):
         return corpus
 
     def balance(self,data_train, train_label, neighbors=5):
-        pos_train=[]
-        neg_train=[]
-        for j,i in enumerate(train_label):
-            if i==1:
+        pos_train = []
+        neg_train = []
+        for j, i in enumerate(train_label):
+            if i == 1:
                 pos_train.append(data_train[j])
             else:
                 neg_train.append(data_train[j])
@@ -87,23 +87,22 @@ class Handler(object):
                 train_inp, train_out = self.balance(train_inp,
                                                     train_out,
                                                     neighbors=5)
-
                 data.set_train_data(train_inp)
                 data.set_train_label(train_out)
                 data.set_test_data(test_inp)
                 data.set_test_label(test_out)
-
                 ## here run all learners
                 self.run_learners(data, result)
-                # print result.get_content()
-                ## report results
-                ## Format = For each dataset, and each learner, we will have five measures
-                self.stats(result.get_content())
 
-                ##dump results:
-                f = {'dataset1':{'learner1':{'measure1':[1,1,1,1]}}}
-                with open('./dump/result.pickle', 'wb') as handle:
-                    pickle.dump(f, handle)
+        for k, v in result.scores.iteritems():
+            print k
+            self.stats(v())
+            print ""
+
+        ##dump results:
+        f = {'dataset1':{'learner1':{'measure1':[1,1,1,1]}}}
+        with open('./dump/result.pickle', 'wb') as handle:
+            pickle.dump(f, handle)
 
     def run_learners(self, data, result):
         LearnerExecutor(self.list_of_learners, data, result)
