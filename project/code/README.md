@@ -12,9 +12,10 @@ The following are steps to install.
 ```
   - Magic
 
-Sample:
+Sample Output: 
 
-```Recall
+```
+Recall
 
 rank ,         name ,    med   ,  iqr
 ----------------------------------------------------
