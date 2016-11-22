@@ -21,6 +21,7 @@ The following are steps to install.
 ## Conclusions:
 - Considering all the measure almost all learners performed the best. But in most cases we saw, Random forest to win.
 - Smote is needed for highly imbalanced classes.
+- Runtimes are within 5-20 mins for each dataset with 6 learners repeating 25 times. Only 2 datasets took about 2hours each.
 
 ## Results: 
 # With Smote:
