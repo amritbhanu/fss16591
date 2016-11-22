@@ -38,6 +38,6 @@ def f(files, cv, l):
     else:
         list_of_learners = [k for k in LEARNERS]
     list_of_learners = list(set(list_of_learners))
-    m = cv[0] if len(cv) > 0 else 2
+    m = cv[0] if len(cv) > 0 else 1
     n = cv[1] if len(cv) > 1 else 2
     handler = Handler(list_of_files, m, n, list_of_learners)

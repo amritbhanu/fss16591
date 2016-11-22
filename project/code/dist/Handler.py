@@ -103,6 +103,7 @@ class Handler(object):
         res={}
         f={}
         filename = unicodedata.normalize('NFKD', filename).encode('ascii', 'ignore')
+        filename=filename.split('/')[-1].split('.')[0]
         for k, v in result.scores.iteritems():
             print k
             f[k]=v()
@@ -112,11 +113,11 @@ class Handler(object):
         print res
 
         ##dump results:
-        with open('./dump/'+filename.split('/')[-1]+'.pickle', 'wb') as handle:
+        with open('./dump/'+filename+'.pickle', 'wb') as handle:
             pickle.dump(res, handle)
 
     def run_learners(self, data, result):
         LearnerExecutor(self.list_of_learners, data, result)
 
     def stats(self, dict=[]):
-        rdivDemo(dict)
+        print rdivDemo(dict)
