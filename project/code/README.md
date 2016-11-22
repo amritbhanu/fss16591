@@ -1,4 +1,4 @@
-# Fault Prediction -- pre-release name
+## Fault Prediction -- pre-release name
 
 The following are steps to install.
 
@@ -12,50 +12,34 @@ The following are steps to install.
 ```
   - Magic
 
-Sample Output: 
+## Experiments:
+- 6 Learners [KNN, NB, SVM, LR, DT, RF]
+- with smote and without smote, 5x5 cross val
+- only 14 datasets, other datasets from openscience were very small.
+- compared against 4 measures, [Precision, recall, accuracy, f_score]
 
-```
-Recall
+## Conclusions:
+- 
 
-rank ,         name ,    med   ,  iqr
-----------------------------------------------------
-   1 ,          SVM ,    0.75  ,  0.00 (  *            |              ), 0.75,  0.75,  0.75
-   1 ,           LR ,    0.76  ,  0.00 (   -*          |              ), 0.76,  0.76,  0.76
-   1 ,          KNN ,    0.77  ,  0.05 (---------*     |              ), 0.74,  0.79,  0.79
-   2 ,           DT ,    0.84  ,  0.02 (               |---*          ), 0.83,  0.85,  0.85
-   2 ,           NB ,    0.85  ,  0.05 (               |---------*    ), 0.83,  0.88,  0.88
-   2 ,           RF ,    0.88  ,  0.04 (               |      -------*), 0.86,  0.90,  0.90
+## Results: 
+### With Smote:
 
-Precision
+![file](https://github.com/amritbhanu/fss16591/raw/master/project/Accuracy_smote.png)
 
-rank ,         name ,    med   ,  iqr
-----------------------------------------------------
-   1 ,           DT ,    0.81  ,  0.01 (-*             |              ), 0.81,  0.81,  0.81
-   1 ,           RF ,    0.84  ,  0.00 (        *      |              ), 0.84,  0.84,  0.84
-   2 ,           NB ,    0.87  ,  0.01 (              -|-*            ), 0.86,  0.87,  0.87
-   2 ,           LR ,    0.88  ,  0.00 (               | -*           ), 0.87,  0.88,  0.88
-   2 ,          SVM ,    0.88  ,  0.01 (               |  -*          ), 0.88,  0.88,  0.88
-   2 ,          KNN ,    0.91  ,  0.03 (               |     --------*), 0.89,  0.92,  0.92
+![file](https://github.com/amritbhanu/fss16591/raw/master/project/Precision_smote.png)
 
-F_score
+![file](https://github.com/amritbhanu/fss16591/raw/master/project/Recall_smote.png)
 
-rank ,         name ,    med   ,  iqr
-----------------------------------------------------
-   1 ,          SVM ,    0.81  ,  0.00 (*              |              ), 0.81,  0.81,  0.81
-   1 ,           LR ,    0.81  ,  0.00 ( *             |              ), 0.81,  0.81,  0.81
-   1 ,           DT ,    0.82  ,  0.01 (  -------*     |              ), 0.82,  0.83,  0.83
-   1 ,          KNN ,    0.83  ,  0.02 (    ---------* |              ), 0.82,  0.84,  0.84
-   2 ,           NB ,    0.86  ,  0.02 (               |   ----------*), 0.85,  0.87,  0.87
-   2 ,           RF ,    0.86  ,  0.02 (               |   ----------*), 0.85,  0.87,  0.87
+![file](https://github.com/amritbhanu/fss16591/raw/master/project/F_score_smote.png)
 
-Accuracy
 
-rank ,         name ,    med   ,  iqr
-----------------------------------------------------
-   1 ,           DT ,    0.72  ,  0.02 (------*        |              ), 0.71,  0.73,  0.73
-   1 ,          SVM ,    0.73  ,  0.00 (     -*        |              ), 0.73,  0.73,  0.73
-   1 ,           LR ,    0.73  ,  0.00 (      *        |              ), 0.73,  0.73,  0.73
-   2 ,          KNN ,    0.75  ,  0.01 (             --|-*            ), 0.75,  0.76,  0.76
-   2 ,           RF ,    0.78  ,  0.03 (               |  ----------* ), 0.76,  0.79,  0.79
-   2 ,           NB ,    0.78  ,  0.02 (               |     --------*), 0.77,  0.80,  0.80
-```
+### Without Smote:
+
+
+![file](https://github.com/amritbhanu/fss16591/raw/master/project/Accuracy_nosmote.png)
+
+![file](https://github.com/amritbhanu/fss16591/raw/master/project/Precision_nosmote.png)
+
+![file](https://github.com/amritbhanu/fss16591/raw/master/project/Recall_nosmote.png)
+
+![file](https://github.com/amritbhanu/fss16591/raw/master/project/F_score_nosmote.png)
