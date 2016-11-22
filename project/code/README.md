@@ -24,7 +24,7 @@ The following are steps to install.
 ## Results: 
 ### With Smote:
 
-![file](https://github.com/amritbhanu/fss16591/raw/master/project/Accuracy_smote.png | height=24 width=48)
+![file](https://github.com/amritbhanu/fss16591/raw/master/project/Accuracy_smote.png)
 
 ![file](https://github.com/amritbhanu/fss16591/raw/master/project/Precision_smote.png)
 
