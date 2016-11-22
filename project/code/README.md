@@ -19,10 +19,11 @@ The following are steps to install.
 - compared against 4 measures, [Precision, recall, accuracy, f_score]
 
 ## Conclusions:
-- 
+- Considering all the measure almost all learners performed the best. But in most cases we saw, Random forest to win.
+- Smote is needed for highly imbalanced classes.
 
 ## Results: 
-### With Smote:
+# With Smote:
 
 ![file](https://github.com/amritbhanu/fss16591/raw/master/project/Accuracy_smote.png)
 
@@ -33,8 +34,7 @@ The following are steps to install.
 ![file](https://github.com/amritbhanu/fss16591/raw/master/project/F_score_smote.png)
 
 
-### Without Smote:
-
+# Without Smote:
 
 ![file](https://github.com/amritbhanu/fss16591/raw/master/project/Accuracy_nosmote.png)
 
