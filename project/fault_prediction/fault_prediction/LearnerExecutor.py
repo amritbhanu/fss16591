@@ -37,7 +37,7 @@ class LearnerExecutor(object):
 
     @staticmethod
     def show_available_learners():
-        return [k for k in LEARNERS]
+        return ", ".join([k for k in LEARNERS])
 
     def run(self, learners=[k for k in LEARNERS], round_results=3):
         for learner_name in learners:

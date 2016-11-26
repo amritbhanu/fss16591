@@ -11,7 +11,7 @@ class DT(Learner):
         super(DT, self).__init__(*args)
 
     def __str__(self):
-        return "DT"
+        return "Decision Tree"
 
     def run(self):
         DT = DecisionTreeClassifier(criterion='entropy')
