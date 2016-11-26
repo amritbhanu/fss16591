@@ -80,5 +80,5 @@ class Learner(object):
     def display_stats(self):
         for k, v in self.result.scores.items():
             print(k)
-            print(rdivDemo(v()))
+            rdivDemo(v())
             print("")
