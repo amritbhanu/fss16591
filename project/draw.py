@@ -15,7 +15,7 @@ if __name__ == '__main__':
     current_dic1 = {}
     para_dict1 = {}
     time1 = {}
-    path = '/Users/amrit/GITHUB/fss16591/project/code/dump/without/'
+    path = '/Users/amrit/GITHUB/fss16591/project/fault_prediction/dump/smote/'
     for root, dirs, files in os.walk(path, topdown=False):
         for name in files:
             a = os.path.join(root, name)
@@ -56,8 +56,8 @@ if __name__ == '__main__':
             #plt.ytext(0.04, 0.5, va='center', rotation='vertical', fontsize=11)
             #plt.text(0.04, 0.5,"Rn (Raw Score)", labelpad=100)
         plt.ylim(0.0, 1.0)
-        plt.xticks(X, range(1,len(fileB)+1))
+        plt.xticks(X, fileB,rotation=90)
         plt.ylabel(j, labelpad=30)
         plt.xlabel("No of Datasets", labelpad=30)
         plt.legend(bbox_to_anchor=(1.00, 1.13), loc=1, ncol=4, borderaxespad=0.1)
-        plt.savefig(j+"_nosmote.png")
+        plt.savefig(j+"_smote.png")
