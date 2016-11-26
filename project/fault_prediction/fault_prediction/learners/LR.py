@@ -1,11 +1,11 @@
-from Learner import Learner
+from Handler import Handler
 from sklearn.linear_model import LogisticRegression
 import sys
 
 sys.dont_write_bytecode = True
 
 
-class LR(Learner):
+class LR(Handler):
     """docstring for LR"""
     def __init__(self, *args):
         super(LR, self).__init__(*args)

@@ -1,11 +1,11 @@
-from Learner import Learner
+from Handler import Handler
 from sklearn import neighbors
 import sys
 
 sys.dont_write_bytecode = True
 
 
-class KNN(Learner):
+class KNN(Handler):
     """docstring for KNN"""
     def __init__(self, *args):
         super(KNN, self).__init__(*args)

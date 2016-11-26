@@ -14,16 +14,16 @@ import sys
 sys.dont_write_bytecode = True
 
 
-class LearnerExecutor(object):
+class Learner(object):
     """
         1) This class is the entry point to execute learners.
         2) :params list_of_learners --> provide a list of learners.
-           :params data --> Data object.
+           :params folds --> Data object.
            :params result --> Result object.
         3) Learner names can be found in config.py
     """
     def __init__(self, file_name, folds=2, splits=2):
-        super(LearnerExecutor, self).__init__()
+        super(Learner, self).__init__()
         self.file_name = file_name
         self.folds = folds
         self.splits = splits

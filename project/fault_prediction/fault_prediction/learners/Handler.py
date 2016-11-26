@@ -9,13 +9,13 @@ import sys
 sys.dont_write_bytecode = True
 
 
-class Learner(object):
+class Handler(object):
     """
         1) This class is the entry point to any learners.
         2)
     """
     def __init__(self, data, result, folds=2, splits=2):
-        super(Learner, self).__init__()
+        super(Handler, self).__init__()
         self.folds = folds
         self.splits = splits
         self.data = data

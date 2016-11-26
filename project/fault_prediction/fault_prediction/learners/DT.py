@@ -1,11 +1,11 @@
-from Learner import Learner
+from Handler import Handler
 from sklearn.tree import DecisionTreeClassifier
 import sys
 
 sys.dont_write_bytecode = True
 
 
-class DT(Learner):
+class DT(Handler):
     """docstring for DT"""
     def __init__(self, *args):
         super(DT, self).__init__(*args)

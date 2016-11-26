@@ -1,9 +1,9 @@
-from fault_prediction.LearnerExecutor import LearnerExecutor
+from fault_prediction import Learner
 import sys
 
 sys.dont_write_bytecode = True
 
-learner = LearnerExecutor('./data/ant.csv')
+learner = Learner('./data/ant.csv')
 learner.run()
 learner.display_stats()
 

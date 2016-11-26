@@ -1,11 +1,11 @@
-from Learner import Learner
+from Handler import Handler
 from sklearn.svm import SVC
 import sys
 
 sys.dont_write_bytecode = True
 
 
-class SVM(Learner):
+class SVM(Handler):
     """docstring for SVM"""
     def __init__(self, *args):
         super(SVM, self).__init__(*args)

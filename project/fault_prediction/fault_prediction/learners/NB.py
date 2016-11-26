@@ -1,11 +1,11 @@
-from Learner import Learner
+from Handler import Handler
 from sklearn.naive_bayes import GaussianNB
 import sys
 
 sys.dont_write_bytecode = True
 
 
-class NB(Learner):
+class NB(Handler):
     """docstring for NB"""
     def __init__(self, *args):
         super(NB, self).__init__(*args)
