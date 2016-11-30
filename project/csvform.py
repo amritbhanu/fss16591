@@ -2,10 +2,8 @@ __author__ = 'amrit'
 
 import matplotlib.pyplot as plt
 import os, pickle
-import operator
 import numpy as np
-import matplotlib.cm as cmx
-import matplotlib.colors as colors
+import csv
 
 if __name__ == '__main__':
 
@@ -23,13 +21,6 @@ if __name__ == '__main__':
                 F_final1 = dict(F_final1.items() + F_final.items())
     #print(F_final1)
 
-    font = {
-        'size': 60}
-
-    plt.rc('font', **font)
-    paras = {'lines.linewidth': 10, 'legend.fontsize': 35, 'axes.labelsize': 60, 'legend.frameon': False,
-             'figure.autolayout': True}
-    plt.rcParams.update(paras)
 
     measure_med = {}
     measure_iqr = {}
@@ -48,17 +39,20 @@ if __name__ == '__main__':
                     measure_med[mea][k[0]] = [np.median(k[1:])]
                     measure_iqr[mea][k[0]] = [np.percentile(k[1:], 75) - np.percentile(k[1:], 25)]
     X = range(len(fileB))
-    print(fileB)
-    for i,j in enumerate(measure_iqr.keys()):
-        plt.figure(num=i, figsize=(25, 15))
-        for k in measure_iqr[j].keys():
-            line,=plt.plot(X, measure_med[j][k],marker='*', markersize=20, label=k+' median')
-            plt.plot(X, measure_iqr[j][k],linestyle="-.", markersize=20,color=line.get_color(),label=k+' iqr')
-            #plt.ytext(0.04, 0.5, va='center', rotation='vertical', fontsize=11)
-            #plt.text(0.04, 0.5,"Rn (Raw Score)", labelpad=100)
-        plt.ylim(0.0, 1.0)
-        plt.xticks(X, fileB,rotation=90)
-        plt.ylabel(j, labelpad=30)
-        plt.xlabel("No of Datasets", labelpad=30)
-        plt.legend(bbox_to_anchor=(1.00, 1.13), loc=1, ncol=4, borderaxespad=0.1)
-        plt.savefig(j+"_smote.png")
+
+    with open('smote.csv', 'a+') as csvinput:
+        fields = ['Learners', 'Measures']+['synapse', 'xerces', 'tomcat', 'xalan', 'camel', 'prop', 'ant', 'arc', 'poi', 'ivy', 'velocity', 'redaktor', 'log4j', 'jedit']
+
+        writer = csv.writer(csvinput, delimiter=',',
+                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(fields)
+
+        for i,j in enumerate(measure_iqr.keys()):
+            plt.figure(num=i, figsize=(25, 15))
+            for k in measure_iqr[j].keys():
+                l=[]
+                for x,y in enumerate(measure_med[j][k]):
+                    l.append("{0:.2f}".format(measure_med[j][k][x]) + ' / ' + "{0:.2f}".format(measure_iqr[j][k][x]))
+
+                writer.writerow([k,  j]+l)
+
