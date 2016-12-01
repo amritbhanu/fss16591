@@ -14,12 +14,13 @@ class Handler(object):
         1) This class is the entry point to any learners.
         2)
     """
-    def __init__(self, data, result, folds=2, splits=2):
+    def __init__(self, data, result, folds=2, splits=2,smote=True):
         super(Handler, self).__init__()
         self.folds = folds
         self.splits = splits
         self.data = data
         self.result = result
+        self.smote_val=smote
 
     def execute(self):
         """
@@ -33,7 +34,8 @@ class Handler(object):
             content = self.split(self.data.get_content(), labels, self.splits)
             for train_inp, train_out, test_inp, test_out in content:
                 # Smoting the highly unbalanced class
-                train_inp, train_out = self.balance(train_inp,
+                if (self.smote_val):
+                    train_inp, train_out = self.balance(train_inp,
                                                     train_out,
                                                     neighbors=5)
                 self.data.set_train_data(train_inp)
@@ -48,17 +50,17 @@ class Handler(object):
         for train_index, test_index in skf.split(inp, out):
             yield inp[train_index], out[train_index], inp[test_index], out[test_index]
 
-    def smote(self, data1, num, k=5):
+    def smote(self, data, num, k=5):
         corpus = []
-        nbrs = NearestNeighbors(n_neighbors=k + 1, algorithm='ball_tree').fit(data1)
-        distances, indices = nbrs.kneighbors(data1)
+        nbrs = NearestNeighbors(n_neighbors=k + 1, algorithm='ball_tree').fit(data)
+        distances, indices = nbrs.kneighbors(data)
         for i in range(0, num):
-            mid = randint(0, len(data1) - 1)
+            mid = randint(0, len(data) - 1)
             nn = indices[mid, randint(1, k)]
             datamade = []
-            for j in range(0, len(data1[mid])):
+            for j in range(0, len(data[mid])):
                 gap = random()
-                datamade.append((data1[nn, j] - data1[mid, j]) * gap + data1[mid, j])
+                datamade.append((data[nn, j] - data[mid, j]) * gap + data[mid, j])
             corpus.append(datamade)
         corpus = np.array(corpus)
         return corpus

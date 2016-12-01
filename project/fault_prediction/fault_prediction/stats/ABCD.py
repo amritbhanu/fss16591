@@ -38,7 +38,7 @@ class counter():
             pf = self.FP / (self.FP + self.TN)
             return Sen, pf, Spec, Prec, Acc, F, G, F2
         except ZeroDivisionError:
-            return 0, 0, 0, 0, 0, 0
+            return 0, 0, 0, 0, 0, 0, 0, 0
 
 
 class ABCD():

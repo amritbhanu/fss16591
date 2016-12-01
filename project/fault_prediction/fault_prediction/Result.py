@@ -13,11 +13,13 @@ class Result(object):
         self.precision = {}
         self.accuracy = {}
         self.f_score = {}
+        self.false_alarm={}
         self.scores = {
             "Recall": self.get_recall,
             "Precision": self.get_precision,
             "Accuracy": self.get_accuracy,
             "F_score": self.get_f_score,
+            "False_alarm":self.get_false_alarm,
         }
 
     def set_recall(self, learner, recall_score):
@@ -28,6 +30,15 @@ class Result(object):
         for k, v in self.recall.items():
             recall.append([k] + v)
         return recall
+
+    def set_false_alarm(self, learner, false_alarm_score):
+        self.false_alarm[learner] = self.false_alarm.get(learner, []) + [false_alarm_score]
+
+    def get_false_alarm(self):
+        false_alarm = []
+        for k, v in self.false_alarm.items():
+            false_alarm.append([k] + v)
+        return false_alarm
 
     def set_precision(self, learner, precision_score):
         self.precision[learner] = self.precision.get(learner, []) + \
