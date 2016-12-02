@@ -22,11 +22,12 @@ class Learner(object):
            :params result --> Result object.
         3) Learner names can be found in config.py
     """
-    def __init__(self, file_name, folds=5, splits=5):
+    def __init__(self, file_name, folds=5, splits=5,smote=True):
         super(Learner, self).__init__()
         self.file_name = file_name
         self.folds = folds
         self.splits = splits
+        self.smote_val=smote
         if not file_name:
             raise Exception("Filename is required.")
         seed(0)
@@ -43,7 +44,7 @@ class Learner(object):
         for learner_name in learners:
             learner = LEARNERS[learner_name](self.data, self.result,
                                              self.folds, self.splits)
-            self.predict = learner.execute()
+            self.predict = learner.execute(self.smote_val)
             for prediction in self.predict:
                 def generate_stats(predict):
                     abcd = ABCD(before=self.data.get_test_label(), after=predict)

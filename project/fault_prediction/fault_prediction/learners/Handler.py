@@ -14,15 +14,14 @@ class Handler(object):
         1) This class is the entry point to any learners.
         2)
     """
-    def __init__(self, data, result, folds=2, splits=2,smote=True):
+    def __init__(self, data, result, folds=5, splits=5):
         super(Handler, self).__init__()
         self.folds = folds
         self.splits = splits
         self.data = data
         self.result = result
-        self.smote_val=smote
 
-    def execute(self):
+    def execute(self,smote_val):
         """
          :param folds: number of folds in cross-validations. Default is 2.
          :param splits: number of splits in cross-validations. Default is 2.
@@ -34,7 +33,7 @@ class Handler(object):
             content = self.split(self.data.get_content(), labels, self.splits)
             for train_inp, train_out, test_inp, test_out in content:
                 # Smoting the highly unbalanced class
-                if (self.smote_val):
+                if (smote_val):
                     train_inp, train_out = self.balance(train_inp,
                                                     train_out,
                                                     neighbors=5)
