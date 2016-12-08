@@ -9,7 +9,7 @@ fil = ['tomcat', 'xalan','synapse', 'xerces', 'camel', 'prop', 'ant', 'arc', 'po
 
 def _test(res=''):
     file = res
-    learner = Learner('/share/aagrawa8/Data/defect/' + file + '.csv',folds=10,splits=10, smote=True)
+    learner = Learner('data/' + file + '.csv',folds=10,splits=10, smote=False)
     learner.run()
     result = {}
     x = {}
@@ -20,7 +20,7 @@ def _test(res=''):
     x["False_alarm"] = learner.get_false_alarm()
     result[file] = x
     learner.display_stats()
-    with open('dump/' + file + '.pickle', 'wb') as handle:
+    with open('dump/new/without/' + file + '.pickle', 'wb') as handle:
         pickle.dump(result, handle)
 
 if __name__ == '__main__':

@@ -12,7 +12,7 @@ if __name__ == '__main__':
     current_dic1 = {}
     para_dict1 = {}
     time1 = {}
-    path = '/Users/amrit/GITHUB/fss16591/project/fault_prediction/dump/smote/'
+    path = '/Users/amrit/GITHUB/fss16591/project/fault_prediction/dump/new/without/'
     for root, dirs, files in os.walk(path, topdown=False):
         for name in files:
             a = os.path.join(root, name)
@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
     measure_med = {}
     measure_iqr = {}
-    l = ["Recall", "Precision", "Accuracy", "F_score"]
+    l = ["Recall", "Precision", "Accuracy", "F_score","False_alarm"]
     for i in l:
         measure_med[i] = {}
         measure_iqr[i] = {}
@@ -40,7 +40,7 @@ if __name__ == '__main__':
                     measure_iqr[mea][k[0]] = [np.percentile(k[1:], 75) - np.percentile(k[1:], 25)]
     X = range(len(fileB))
 
-    with open('smote.csv', 'a+') as csvinput:
+    with open('fault_prediction/dump/new/nosmote.csv', 'a+') as csvinput:
         fields = ['Learners', 'Measures']+['synapse', 'xerces', 'tomcat', 'xalan', 'camel', 'prop', 'ant', 'arc', 'poi', 'ivy', 'velocity', 'redaktor', 'log4j', 'jedit']
 
         writer = csv.writer(csvinput, delimiter=',',
