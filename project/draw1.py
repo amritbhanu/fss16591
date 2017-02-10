@@ -13,13 +13,13 @@ smote1={'synapse': {'False_alarm': [['KNN', 0.294, 0.235, 0.294, 0.235, 0.353, 0
 
 if __name__ == '__main__':
     fileB=[]
-    fileB1 = ['xalan', 'log4j', 'xerces', 'poi', 'velocity', 'synapse', 'ant', 'redaktor', 'arc', 'ivy', 'prop', 'tomcat', 'camel', 'jedit']
+    fileB1 = ['ant', 'redaktor', 'arc', 'ivy', 'prop', 'tomcat', 'camel', 'jedit']
 
-    F_final1 = {}
+    '''F_final1 = {}
     current_dic1 = {}
     para_dict1 = {}
     time1 = {}
-    path = '/Users/amrit/GITHUB/fss16591/project/fault_prediction/dump/new/without/'
+    path = '/Users/amrit/GITHUB/fss16591/project/fault_prediction/dump/new/smote/'
     for root, dirs, files in os.walk(path, topdown=False):
         for name in files:
             a = os.path.join(root, name)
@@ -27,9 +27,9 @@ if __name__ == '__main__':
                 F_final = pickle.load(handle)
                 #print(F_final)
                 F_final1 = dict(F_final1.items() + F_final.items())
-    print(F_final1)
+    print(F_final1)'''
 
-    '''font = {
+    font = {
         'size': 50}
 
     plt.rc('font', **font)
@@ -62,20 +62,29 @@ if __name__ == '__main__':
                     measure_iqr[mea][k[0]] = [(np.percentile(k[1:], 75) - np.percentile(k[1:], 25))-(np.percentile(nosmote[f][mea][i][1:], 75) - np.percentile(nosmote[f][mea][i][1:], 25))]
     X = range(len(fileB))
 
-    fileB2 = ['(99) xalan', '(92) log4j', '(74) xerces', '(63) poi', '(34) velocity', '(33) synapse', '(22) ant', '(15) redaktor', '(11) arc', '(11) ivy', '(10) prop', '(9) tomcat', '(4) camel', '(2) jedit']
+    fileB2 = ['(22) ant', '(15) redaktor', '(11) arc', '(11) ivy', '(10) prop', '(9) tomcat', '(4) camel', '(2) jedit']
+    tuned={'False_alarm':{'KNN':[0.13, 0.33, 0.258, 0.22, 0.21, 0.24, 0.033, 0.12]
+, 'SVM': [0.14, 0.12, 0.228, 0.18, 0.27, 0.17, 0.1, 0.13], 'NB': [0.04, 0.11, 0.15, 0.03, 0.23, 0.03, 0.1, 0.2],'RF': [0.1, 0.1, 0.06, 0.04, 0.03, 0.09, 0.0, 0.0],
+'LR': [0.155, 0.14, 0.25, 0.18, 0.31, 0.17, 0.0, 0.12],'DT':
+[-0.06, 0.0, 0.08, 0.09, 0.1, 0.1, 0.03, 0.04]}, 'Recall':{ 'KNN': [0.34, 0.55, 0.51, 0.77, 0.59, 0.59, 0.35, 1.0], 'SVM': [0.22, 0.18, 0.55, 0.33, 0.59, 0.50, 0.29, 1.0], 'NB':[0.1, 0.05, 0.09, 0.3, 0.19, 0.21, 0.1, 0.2], 'RF': [0.1, 0.07, 0.3, 0.09, 0.11, 0.25, 0.1, 0.06],'LR':[0.3, 0.09, 0.68, 0.27, 0.6, 0.45, 0.19, 1.0],'DT':[0.058, 0.33, 0.16, 0.0, 0.047, 0.089, 0.0, 0.0]},
+'Precision':{'KNN': [0.13, 0.23, 0.18, 0.33, 0.22, 0.22, 0.1, 0.09], 'SVM': [-0.1, -0.40, 0.20, 0.0, 0.199, -0.20, 0.1, 0.06],'NB': [0.0, 0.0, 0.02, 0.0, 0.02, 0.05, 0.0, 0.0], 'RF': [0.06, -0.3, 0.21, 0.1, 0.0, -0.14, 0.05, 0.1],'LR':[-0.1, -0.6, 0.29, -0.15, 0.15, -0.15, 0.1, 0.07],'DT': [0.1, 0.15, 0.19, 0.0, 0.04, 0.02, 0.05, 0.1]},'F_score':{ 'KNN': [0.15, 0.33, 0.30, 0.43, 0.3, 0.31, 0.15, 0.16],'SVM': [0.2, 0.1, 0.25, 0.15, 0.32, 0.19, 0.1, 0.15],'NB':[0.1, 0.1, 0.2, 0.15, 0.11, 0.17, 0.17, 0.1],'RF':[0.12, 0.07, 0.36, 0.1, 0.15, 0.19, 0.1, 0.06],'LR': [0.1, 0.09, 0.36, 0.09, 0.29, 0.15, 0.1, 0.13],'DT': [0.09, 0.1, 0.19, 0.1, 0.14, 0.09, 0.15, 0.09]},'Accuracy':{'KNN': [0.05, 0.65, 0.72, 0.80, 0.75, 0.79, 0.36, 0.71], 'SVM': [0.05, 0.11, 0.79, 0.05, 0.71, 0.05, 0.15, 0.74],'NB': [0.02, 0.05, 0.1, 0.06, 0.09, 0.02, 0.1, 0.0],'RF': [0.01, 0.03, 0.81, 0.03, 0.05, 0.02, 0.08, 0.1],'LR': [0.06, 0.1, 0.80, 0.08, 0.69, 0.1, 0.15, 0.75],'DT': [0.09, 0.15, 0.48, 0.1, 0.08, 0.05, 0.1, 0.15]} }
+
 
     for i,j in enumerate(measure_iqr.keys()):
         plt.figure(num=i, figsize=(25, 15))
+        plt.subplot(121)
         for k in measure_iqr[j].keys():
-            print(measure_med[j][k])
-            line,=plt.plot(X, measure_med[j][k],marker='*', markersize=20, label=k+' median')
-            #plt.plot(X, measure_iqr[j][k],linestyle="-.", markersize=20,label=k+' iqr')
+            line,=plt.plot(X,tuned[j][k] ,marker='*', markersize=20, label=k+' tuned')
+            plt.plot(X, measure_med[j][k],linestyle="-.", markersize=20,label=k+' untuned')
             #plt.ytext(0.04, 0.5, va='center', rotation='vertical', fontsize=11)
             #plt.text(0.04, 0.5,"Rn (Raw Score)", labelpad=100)
+        #box = ax.get_position()
+        #ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
         plt.ylim(-1.0, 1.0)
         plt.xticks(X, fileB2,rotation=90)
         plt.ylabel(j, labelpad=30)
         plt.xlabel("Dataset Name", labelpad=30)
-        plt.axhline(0, linestyle="-.",color='black')
-        plt.legend(bbox_to_anchor=(0.8, 1.13), loc=1, ncol=3, borderaxespad=0.1)
-        #plt.savefig("fault_prediction/dump/new/"+j+"_delta.png")'''
+        #plt.axhline(0, linestyle="-.",color='black')
+        #plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+        plt.legend(bbox_to_anchor=(1.05, 1.0), loc=2, borderaxespad=0.)
+        plt.savefig("fault_prediction/dump/new/"+j+"_tuned.png")

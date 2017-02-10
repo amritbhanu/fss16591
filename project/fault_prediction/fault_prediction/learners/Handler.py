@@ -78,15 +78,9 @@ class Handler(object):
         if len(pos_train) < len(neg_train):
             pos_train = self.smote(pos_train, num, k=neighbors)
             neg_train = neg_train[np.random.choice(len(neg_train), num, replace=False)]
-            data_train1 = np.vstack((pos_train, neg_train))
-            label_train = [1] * len(pos_train) + [0] * len(neg_train)
-            return data_train1, label_train
-        else:
-            neg_train = self.smote(neg_train, num, k=neighbors)
-            pos_train = pos_train[np.random.choice(len(pos_train), num, replace=False)]
-            data_train1 = np.vstack((pos_train, neg_train))
-            label_train = [1] * len(pos_train) + [0] * len(neg_train)
-            return data_train1, label_train
+        data_train1 = np.vstack((pos_train, neg_train))
+        label_train = [1] * len(pos_train) + [0] * len(neg_train)
+        return data_train1, label_train
 
     def run(self):
         pass
